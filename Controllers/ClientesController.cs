@@ -26,15 +26,15 @@ namespace CadastroPessoas.Controllers
         }
 
         // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
             var cliente = await _context.Cliente
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (cliente == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace CadastroPessoas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nome")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Nome,DataNascimento,RG,CPF,Logradouro,Bairro,Cidade,Complemento,UF,CEP,EstadoCivil,NomePai,NomeMae")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -66,14 +66,14 @@ namespace CadastroPessoas.Controllers
         }
 
         // GET: Clientes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Cliente.FindAsync(id);
+            var cliente = await _context.Cliente.FindAsync(Id);
             if (cliente == null)
             {
                 return NotFound();
@@ -86,9 +86,9 @@ namespace CadastroPessoas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nome")] Cliente cliente)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,Nome,DataNascimento,RG,CPF,Logradouro,Bairro,Cidade,Complemento,UF,CEP,EstadoCivil,NomePai,NomeMae")] Cliente cliente)
         {
-            if (id != cliente.id)
+            if (Id != cliente.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace CadastroPessoas.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.id))
+                    if (!ClienteExists(cliente.Id))
                     {
                         return NotFound();
                     }
@@ -117,15 +117,15 @@ namespace CadastroPessoas.Controllers
         }
 
         // GET: Clientes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
             var cliente = await _context.Cliente
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (cliente == null)
             {
                 return NotFound();
@@ -137,9 +137,9 @@ namespace CadastroPessoas.Controllers
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int Id)
         {
-            var cliente = await _context.Cliente.FindAsync(id);
+            var cliente = await _context.Cliente.FindAsync(Id);
             if (cliente != null)
             {
                 _context.Cliente.Remove(cliente);
@@ -149,9 +149,9 @@ namespace CadastroPessoas.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool ClienteExists(int Id)
         {
-            return _context.Cliente.Any(e => e.id == id);
+            return _context.Cliente.Any(e => e.Id == Id);
         }
     }
 }
